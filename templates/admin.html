@@ -1,0 +1,19 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin Dashboard | EVCharge</title><link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"></head>
+<body><header><a class="brand" href="{{ url_for('home') }}">⚡ EV<span>Charge</span></a>
+<nav><a href="{{ url_for('dashboard') }}">User Dashboard</a><a href="{{ url_for('stations') }}">Stations</a></nav><a class="primary" href="{{ url_for('logout') }}">Logout</a></header>
+<main class="section"><span class="eyebrow">ADMIN CONTROL CENTER</span><h1>EVCharge Admin</h1>
+{% with messages=get_flashed_messages() %}{% if messages %}<div class="flash">{{ messages[0] }}</div>{% endif %}{% endwith %}
+<div class="stats"><div><b>{{ stats.users }}</b><span>Users</span></div><div><b>{{ stats.stations }}</b><span>Stations</span></div><div><b>{{ stats.bookings }}</b><span>Total bookings</span></div><div><b>{{ stats.active }}</b><span>Active bookings</span></div></div>
+<div class="admin-grid"><section class="panel"><h2>Add Station</h2><form class="form" method="post" action="{{ url_for('add_station') }}">
+<label>Name<input name="name" required placeholder="Station name"></label><label>Location<input name="location" required placeholder="Area, City"></label>
+<label>Charger Type<select name="charger_type"><option>CCS2</option><option>Type 2</option></select></label>
+<label>Speed (kW)<input type="number" name="speed" min="1" required></label><label>Price (₹/kWh)<input type="number" name="price" min="0" step="0.01" required></label>
+<label>Available Slots<input type="number" name="available_slots" min="0" required></label><button class="primary full">Add Station</button></form></section>
+<section class="panel"><h2>Station Management</h2><div class="table-wrap"><table><tr><th>Station</th><th>Location</th><th>Slots</th><th>Action</th></tr>
+{% for s in stations %}<tr><td>{{ s.name }}</td><td>{{ s.location }}</td><td>{{ s.available_slots }}</td><td><form method="post" action="{{ url_for('delete_station',station_id=s.id) }}"><button class="danger small" onclick="return confirm('Delete this station?')">Delete</button></form></td></tr>{% endfor %}
+</table></div></section></div>
+<section class="panel"><h2>Recent Bookings</h2><div class="table-wrap"><table><tr><th>User</th><th>Station</th><th>Date</th><th>Time</th><th>Status</th></tr>
+{% for b in bookings %}<tr><td>{{ b.user_name }}<br><small>{{ b.email }}</small></td><td>{{ b.station_name }}</td><td>{{ b.booking_date }}</td><td>{{ b.booking_time }}</td><td><span class="pill {% if b.status=='Cancelled' %}cancelled{% endif %}">{{ b.status }}</span></td></tr>{% else %}<tr><td colspan="5">No bookings yet.</td></tr>{% endfor %}</table></div></section>
+</main></body></html>
