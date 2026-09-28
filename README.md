@@ -1,38 +1,72 @@
-# EVCharge – Phase 4
+# EVCharge – Smart EV Charging Station Management System
 
-Phase 4 extends the working Phase 3 project with:
-- My Bookings history
-- Booking status (Confirmed / Cancelled)
-- Cancel Booking and automatic slot release
+EVCharge is a web-based Smart EV Charging Station Management System developed using Python Flask, SQLite, HTML, CSS and JavaScript.
+
+The system allows users to register, log in, search charging stations, book charging slots, view booking history and cancel bookings. An admin module is provided to manage charging stations and monitor basic system statistics.
+
+## Features
+
+### User Features
+- User Registration
+- User Login and Logout
+- Charging Station Listing
+- Search and Filter Charging Stations
+- Charging Slot Booking
+- My Bookings / Booking History
+- Booking Cancellation
+- Session-based Authentication
+
+### Admin Features
 - Admin Dashboard
-- User / station / booking statistics
-- Add and delete charging stations
-- Admin recent-booking table
-- Responsive UI improvements
+- Total Users, Stations and Bookings Statistics
+- Add Charging Station
+- Delete Charging Station
+- View Recent Bookings
 
-## Run on Windows
+### DevOps Features
+- Agile project management using Jira
+- Source code management using GitHub
+- Docker containerization
+- Docker image creation
+- Docker container deployment
 
-Open PowerShell in this folder:
+## Technology Stack
 
-```powershell
-pip install -r requirements.txt
-python app.py
-```
+| Technology | Purpose |
+|---|---|
+| Python | Backend Programming |
+| Flask | Web Framework |
+| SQLite | Database |
+| HTML | Frontend Structure |
+| CSS | UI Styling |
+| JavaScript | Frontend Interaction |
+| Git | Version Control |
+| GitHub | Source Code Repository |
+| Jira | Agile Project Management |
+| Docker | Containerization and Deployment |
 
-Open:
-http://127.0.0.1:5001
+## Project Workflow
 
-## Demo Admin Account
+Jira → GitHub → Docker Build → Docker Image → Docker Container → EVCharge
 
-Email: `admin@evcharge.com`
-Password: `Admin@123`
+## Project Structure
 
-Use this only for the local mini-project/demo. Change the credentials and secret key for any real deployment.
-
-## User flow
-
-Register/Login → Dashboard → Find Stations → Book → My Bookings → Cancel if needed.
-
-## Admin flow
-
-Login with demo admin → Admin Dashboard → View statistics → Add/Delete stations → View recent bookings.
+```text
+EVCharge/
+│
+├── app.py
+├── requirements.txt
+├── Dockerfile
+├── .gitignore
+├── README.md
+│
+├── static/
+│   └── style.css
+│
+└── templates/
+    ├── index.html
+    ├── auth.html
+    ├── dashboard.html
+    ├── stations.html
+    ├── book.html
+    └── admin.html
